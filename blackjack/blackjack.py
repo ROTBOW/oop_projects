@@ -30,4 +30,7 @@ class Blackjack:
     def __shuffle(self):
         self.deck = Card.shuffle_desk(self.deck)
 
+    def draw(self, player) -> None:
+        player = self.player_hand if player == 'player' else self.cpu_hand
+        player.append(self.deck.pop())
     
