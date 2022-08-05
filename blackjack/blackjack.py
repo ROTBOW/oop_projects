@@ -47,6 +47,15 @@ class Blackjack:
             [str(cards.get(x.value, x.value)) for x in self.player_hand]
             ))
         
+    def action(self):
+        print('Hit or Stay?')
+        answer = input('-> ')
+        if answer in ['hit', 'h', 'Hit']:
+            self.draw('player')
+            if self.get_count(self.player_hand) > 21:
+                self.turn = not self.turn
+        else:
+            self.turn = not self.turn
 
     def play(self):
         print('BlackJack Begin.')
