@@ -49,6 +49,7 @@ class Blackjack:
         print(', '.join(
             [str(x) for x in self.player_hand]
             ))
+        print(self.get_count(self.player_hand))
 
     def get_count(self, hand) -> int:
         aces, count = 0, 0
@@ -86,6 +87,18 @@ class Blackjack:
             if self.get_count(self.cpu_hand) > 17: break
             self.draw('cpu')
 
+    def check_winner(self) -> None:
+        player, cpu = self.get_count(self.player_hand), self.get_count(self.cpu_hand)
+        # if player > 21 or cpu > 21:
+        #     pass
+        if player <= 21 and cpu > 21:
+            self.winner = 'player'
+        elif player > 21 and cpu <= 21:
+            self.winner = 'CPU'
+        else:
+            self.winner = 'player' if player > cpu else 'CPU'
+
+
     def play(self) -> None:
         print('BlackJack Begin.')
         self.deck = Card.create_deck()
@@ -94,14 +107,22 @@ class Blackjack:
             self.show_hand()
             self.action()
         self.cpu_move()
-        self.check_winner() # needs to be made
-        print(f'Game Over.\nWinner is {self.winner}')
+        self.show_hand()
+        self.check_winner()
+        print(f'Game Over.\nWinner is {self.winner}\n{self.get_count(self.player_hand)} vs {self.get_count(self.cpu_hand)}')
 
 game = Blackjack()
-game.shuffle()
-game.draw('player')
-game.draw('player')
-game.draw('player')
-game.draw('player')
-game.show_hand()
-print(game.get_count(game.player_hand))
+game.play()
+# game.shuffle()
+# game.draw('player')
+# game.draw('player')
+# game.draw('cpu')
+# game.draw('cpu')
+# game.show_hand()
+# game.check_winner()
+# game.draw('player')
+# game.draw('player')
+# game.draw('player')
+# game.draw('player')
+# game.show_hand()
+# print(game.get_count(game.player_hand))
