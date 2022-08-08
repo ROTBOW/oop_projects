@@ -96,8 +96,6 @@ class Blackjack:
 
     def check_winner(self) -> None:
         player, cpu = self.get_count(self.player_hand), self.get_count(self.cpu_hand)
-        # if player > 21 or cpu > 21:
-        #     pass
         if player <= 21 and cpu > 21:
             self.winner = 'player'
         elif player > 21 and cpu <= 21:
@@ -120,18 +118,7 @@ class Blackjack:
         self.check_winner()
         print(f'Game Over.\nWinner is {self.winner}\n{self.get_count(self.player_hand)} vs {self.get_count(self.cpu_hand)}')
 
+
+
 game = Blackjack()
 game.play()
-# game.shuffle()
-# game.draw('player')
-# game.draw('player')
-# game.draw('cpu')
-# game.draw('cpu')
-# game.show_hand()
-# game.check_winner()
-# game.draw('player')
-# game.draw('player')
-# game.draw('player')
-# game.draw('player')
-# game.show_hand()
-# print(game.get_count(game.player_hand))
