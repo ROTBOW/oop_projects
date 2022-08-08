@@ -1,3 +1,4 @@
+from time import sleep
 import random
 class Card:
 
@@ -86,6 +87,12 @@ class Blackjack:
         while True:
             if self.get_count(self.cpu_hand) > 17: break
             self.draw('cpu')
+            [print(f'CPU is Drawing! CPU now has {len(self.cpu_hand)} card(s)')]
+            sleep(.3)
+        if self.get_count(self.cpu_hand) > 21:
+            print('CPU Bust!')
+        else:
+            print('CPU Stays!')
 
     def check_winner(self) -> None:
         player, cpu = self.get_count(self.player_hand), self.get_count(self.cpu_hand)
@@ -95,6 +102,8 @@ class Blackjack:
             self.winner = 'player'
         elif player > 21 and cpu <= 21:
             self.winner = 'CPU'
+        elif player == cpu:
+            self.winner = 'Tie'
         else:
             self.winner = 'player' if player > cpu else 'CPU'
 
