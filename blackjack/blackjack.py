@@ -120,18 +120,7 @@ class Blackjack:
         self.check_winner()
         print(f'Game Over.\nWinner is {self.winner}\n{self.get_count(self.player_hand)} vs {self.get_count(self.cpu_hand)}')
 
+
+
 game = Blackjack()
 game.play()
-# game.shuffle()
-# game.draw('player')
-# game.draw('player')
-# game.draw('cpu')
-# game.draw('cpu')
-# game.show_hand()
-# game.check_winner()
-# game.draw('player')
-# game.draw('player')
-# game.draw('player')
-# game.draw('player')
-# game.show_hand()
-# print(game.get_count(game.player_hand))
