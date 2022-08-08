@@ -6,7 +6,7 @@ class Card:
         self.suit = suit
 
     @classmethod
-    def create_deck(self):
+    def create_deck(self) -> list:
         deck = []
         suits = {'hearts', 'spades', 'clovers', 'diamonds'}
         for suit in suits:
@@ -17,8 +17,17 @@ class Card:
         return deck
 
     @classmethod
-    def shuffle_desk(self, deck):
-        return random.shuffle(deck)
+    def shuffle_deck(self, deck) -> list:
+        random.shuffle(deck)
+
+    def __str__(self) -> str:
+        cards = {
+            1: 'Ace',
+            11: 'Jack',
+            12: 'Queen',
+            13: 'King'
+            }
+        return f'{cards.get(self.value, self.value)} of {self.suit}'
 
 class Blackjack:
     
@@ -29,25 +38,40 @@ class Blackjack:
         self.turn = True
         self.winner = ''
 
-    def __shuffle(self):
-        self.deck = Card.shuffle_desk(self.deck)
+    def shuffle(self) -> None:
+        Card.shuffle_deck(self.deck)
 
     def draw(self, player) -> None:
         player = self.player_hand if player == 'player' else self.cpu_hand
         player.append(self.deck.pop())
     
-    def show_hand(self):
-        cards = {
-            1: 'Ace',
-            11: 'Jack',
-            12: 'Queen',
-            13: 'King'
-        }
+    def show_hand(self) -> None:
         print(', '.join(
-            [str(cards.get(x.value, x.value)) for x in self.player_hand]
+            [str(x) for x in self.player_hand]
             ))
+
+    def get_count(self, hand) -> int:
+        aces, count = 0, 0
+        for card in hand:
+            card = card.value
+
+            if card == 1:
+                aces += 1
+            elif card >= 10:
+                count += 10
+            else:
+                count += card
+
+        for _ in range(aces):
+            if 11 + count <= 21:
+                count += 11
+            else:
+                count += 1
+                
+        return count
+
         
-    def action(self):
+    def action(self) -> None:
         print('Hit or Stay?')
         answer = input('-> ')
         if answer in ['hit', 'h', 'Hit']:
@@ -57,20 +81,27 @@ class Blackjack:
         else:
             self.turn = not self.turn
 
-    def play(self):
+    def cpu_move(self) -> None:
+        while True:
+            if self.get_count(self.cpu_hand) > 17: break
+            self.draw('cpu')
+
+    def play(self) -> None:
         print('BlackJack Begin.')
         self.deck = Card.create_deck()
-        self.__shuffle()
+        self.shuffle()
         while self.turn:
             self.show_hand()
-            self.action() # needs to be made
-        self.cpu_move() # needs to be made
+            self.action()
+        self.cpu_move()
         self.check_winner() # needs to be made
         print(f'Game Over.\nWinner is {self.winner}')
 
-# game = Blackjack()
-# game.draw('player')
-# game.draw('player')
-# game.draw('player')
-# game.draw('player')
-# game.show_hand()
+game = Blackjack()
+game.shuffle()
+game.draw('player')
+game.draw('player')
+game.draw('player')
+game.draw('player')
+game.show_hand()
+print(game.get_count(game.player_hand))
