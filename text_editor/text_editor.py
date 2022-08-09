@@ -160,14 +160,14 @@ class TextEditor:
 
 
 
-# text = TextEditor()
-# queries = [
-#     ['APPEND', 'Hello, world!'],
-#     ['MOVE', 6],
-#     ['DELETE'],
-#     ['APPEND', 'CAT'],
-#     ['SELECT', 5, 8],
-#     ['DELETE'],
-#     ['APPEND', ' ']
-# ]
-# print(text.output_answer(queries))
+text = TextEditor()
+queries = [
+    ['APPEND', 'Hello, world!'],
+    ['MOVE', 6],
+    ['DELETE'],
+    ['APPEND', 'CAT'],
+    ['SELECT', 5, 8],
+    ['DELETE'],
+    ['APPEND', ' ']
+]
+print(text.output_answer(queries))
