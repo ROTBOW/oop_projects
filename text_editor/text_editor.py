@@ -1,5 +1,5 @@
 '''
-et queries = [
+example queries = [
     ["APPEND", "Hey"],               //| "" -> "Hey"
     ["APPEND", " there"],            //| "Hey" -> "Hey there"
     ["APPEND", "!"]                  //| "Hey there" -> "Hey there!"
